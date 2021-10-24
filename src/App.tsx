@@ -11,7 +11,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/" component={TableContainer} />
-          <Route exact path="/rawjson/:data" component={RawJson} />
+          <Route exact path="/rawjson/:author/:title" component={RawJson} />
         </Switch>
       </Router>
     </Provider>

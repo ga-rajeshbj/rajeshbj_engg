@@ -51,8 +51,9 @@ function MainTable({ column, rows }: TableProps) {
 
   const displayJson = (data: any): void => {
     // history.push(`/rawjson/${data}`);
+    console.log(data);
     history?.push({
-      pathname: `/rawjson/${page}`,
+      pathname: `/rawjson/${data.author}/${data.title}`,
       state: { data },
     });
   };
