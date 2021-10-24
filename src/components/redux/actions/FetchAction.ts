@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ACTION } from "../Action";
-import { hit, responseObj, User } from "../ActionTypes";
+import { hit, responseObj } from "../ActionTypes";
 
 const loading = (): ACTION => ({
   type: "LOADING",
@@ -26,8 +26,6 @@ export const fetchData = (hitNumber: number) => {
       )
       .then((response) => {
         dispatch(successFetch(response.data.hits));
-        console.log(response.data);
-        console.log(typeof response.data.hits);
       })
       .catch((error) => dispatch(failFetch(error)));
   };

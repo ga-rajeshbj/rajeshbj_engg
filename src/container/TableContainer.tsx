@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../components/redux/actions/FetchAction";
 import { AppState } from "../components/redux/rootReducer";
-import Table from "../components/Table/Table";
+import MainTable from "../components/Table/Table";
 import { column } from "../components/Types/Types";
-
+import CircularProgress from "@mui/material/CircularProgress";
 function TableContainer() {
   const [post, setpost] = useState<number>(0);
   const Reduxstate = useSelector((state: AppState) => state.fechingReducer);
@@ -19,20 +19,22 @@ function TableContainer() {
     return () => clearInterval(interval);
   }, [post]);
 
-  // setTimeout(() => {
-  //   setpost(post + 1);
-  //   console.log(post);
-  //
-  // }, 1000);
   const columns = React.useMemo(
     (): column[] => [
       {
         Header: "Title",
         accessor: "title",
+        width: "900px",
+        className: "w-25",
+        widthStyle: {
+          width: "200px",
+        },
       },
       {
         Header: "URL",
         accessor: "url",
+
+        width: "60px",
       },
       {
         Header: "Created At",
@@ -46,12 +48,13 @@ function TableContainer() {
     []
   );
 
-  console.log("length", Reduxstate.data.length);
   return (
-    <div>
-      <Table column={columns} rows={Reduxstate.data} />
-
-      <button onClick={() => dispatch(fetchData(post + 1))}>increse</button>
+    <div className="d-flex justify-content-center align-items-center">
+      {Reduxstate.data.length ? (
+        <MainTable column={columns} rows={Reduxstate.data} />
+      ) : (
+        <CircularProgress color="primary" size={100} />
+      )}
     </div>
   );
 }

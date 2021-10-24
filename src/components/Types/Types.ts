@@ -3,6 +3,11 @@ import { hit } from "../redux/ActionTypes";
 export type column = {
   Header: string;
   accessor: any;
+  width?: string;
+  maxWidth?: any;
+  minWidth?: any;
+  widthStyle?: any;
+  className?: string;
 };
 
 export type user = {

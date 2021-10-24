@@ -1,5 +1,5 @@
 import { ACTION } from "../Action";
-import { State, User } from "../ActionTypes";
+import { State } from "../ActionTypes";
 
 const intialState: State = {
   loading: false,
@@ -15,10 +15,6 @@ export const fechingReducer = (state = intialState, action: ACTION): State => {
         loading: true,
       };
     case "SUCCESS":
-      // console.log(...action.payload);
-      console.log(typeof action.payload);
-      console.log(state.data.length);
-
       return {
         loading: false,
         data: [...state.data, ...action.payload],
