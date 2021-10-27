@@ -3,7 +3,7 @@ import React, { useMemo, useEffect } from "react";
 import { useTable, usePagination, useResizeColumns } from "react-table";
 
 import { TableProps } from "../Types/Types";
-
+import moment from "moment";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -57,7 +57,10 @@ function MainTable({ column, rows }: TableProps) {
       state: { data },
     });
   };
-
+  const utcConverter = (date: string): string => {
+    let local = moment.utc(date).local().format("YYYY-MMM-DD h:mm A");
+    return local;
+  };
   return (
     <div>
       <Table {...getTableProps()}>
@@ -87,7 +90,9 @@ function MainTable({ column, rows }: TableProps) {
                 {row.cells.map((cell) => {
                   return (
                     <TableCell {...cell.getCellProps()}>
-                      {cell.render("Cell")}{" "}
+                      {cell.column.Header === "Created At"
+                        ? utcConverter(cell.value)
+                        : cell.render("Cell")}
                     </TableCell>
                   );
                 })}
