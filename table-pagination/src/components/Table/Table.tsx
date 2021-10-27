@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-
+import moment from "moment";
 import {
   useTable,
   usePagination,
@@ -80,6 +80,11 @@ function MainTable({ column, rows }: TableProps) {
     setObject(data);
   };
 
+  const utcConverter = (date: string): string => {
+    let local = moment.utc(date).local().format("YYYY-MMM-DD h:mm A");
+    return local;
+  };
+
   return (
     <div>
       <Table {...getTableProps()}>
@@ -107,12 +112,16 @@ function MainTable({ column, rows }: TableProps) {
             return (
               <TableRow
                 {...row.getRowProps()}
-                onClick={() => displayJson(row.original)}
+                onClick={() => {
+                  displayJson(row.original);
+                }}
               >
                 {row.cells.map((cell) => {
                   return (
                     <TableCell {...cell.getCellProps()}>
-                      {cell.render("Cell")}{" "}
+                      {cell.column.Header === "Created At"
+                        ? utcConverter(cell.value)
+                        : cell.render("Cell")}
                     </TableCell>
                   );
                 })}

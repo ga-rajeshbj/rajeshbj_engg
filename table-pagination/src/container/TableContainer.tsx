@@ -38,6 +38,7 @@ function TableContainer() {
         Header: "Created At",
         accessor: "created_at",
         filter: true,
+        utc: true,
       },
       {
         Header: "Author",

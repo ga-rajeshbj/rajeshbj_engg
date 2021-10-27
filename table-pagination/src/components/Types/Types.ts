@@ -10,6 +10,7 @@ export type column = {
   className?: string;
   filter?: any;
   canFilter?: any;
+  utc?: boolean;
 };
 
 export type user = {
