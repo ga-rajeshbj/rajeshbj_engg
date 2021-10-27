@@ -8,7 +8,7 @@ interface State {
 
 const intialState: State = {
   data: [],
-  loading: true,
+  loading: false,
 };
 
 export const reducer = (state = intialState, action: ACTION): State => {
@@ -21,7 +21,7 @@ export const reducer = (state = intialState, action: ACTION): State => {
     case "ADD_DATA":
       return {
         data: action.payload,
-        loading: true,
+        loading: false,
       };
 
     default:
