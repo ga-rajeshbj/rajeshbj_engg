@@ -7,6 +7,7 @@ import { AstroidData } from "../components/Types";
 
 function FindingForm() {
   const [asteroidID, setAsteroidID] = useState<null | number>(null);
+  const [disable, setDisable] = useState<boolean>(false);
 
   const handleIdChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setAsteroidID(Number(event.target.value));
@@ -77,10 +78,14 @@ function FindingForm() {
       <div>
         {" "}
         <Button
-          onClick={() => getRamdomAstroid()}
+          onClick={() => {
+            getRamdomAstroid();
+            setDisable(true);
+          }}
           color="secondary"
           variant="contained"
           className="mt-5"
+          disabled={disable}
         >
           Rondom Astroid
         </Button>
