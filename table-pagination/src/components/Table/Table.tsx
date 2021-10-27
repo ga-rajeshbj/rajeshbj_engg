@@ -40,6 +40,16 @@ function MainTable({ column, rows }: TableProps) {
   const [object, setObject] = useState<hit | undefined>();
   const handleClose = () => setOpen(false);
 
+  const utcConverter = (date: string): string => {
+    let local = moment.utc(date).local().format("YYYY-MMM-DD h:mm A");
+    return local.toString();
+  };
+  // rows = rows.map((data: any) => {
+  //   return {
+  //     ...data,
+  //     created_at: utcConverter(data.created_at),
+  //   };
+  // });
   const columns = useMemo(() => column, [column]);
   const data = useMemo(() => rows, [rows]);
   const {
@@ -70,19 +80,18 @@ function MainTable({ column, rows }: TableProps) {
   const { pageIndex } = state;
 
   useEffect(() => {
-    setPageSize(20);
+    const gotopage = async () => {
+      await setPageSize(20);
 
-    gotoPage(pageCount - 1);
+      await gotoPage(pageCount - 1);
+    };
+    console.log("object", pageCount);
+    gotopage();
   }, [pageCount]);
 
   const displayJson = (data: any): void => {
     setOpen(true);
     setObject(data);
-  };
-
-  const utcConverter = (date: string): string => {
-    let local = moment.utc(date).local().format("YYYY-MMM-DD h:mm A");
-    return local;
   };
 
   return (
@@ -119,9 +128,7 @@ function MainTable({ column, rows }: TableProps) {
                 {row.cells.map((cell) => {
                   return (
                     <TableCell {...cell.getCellProps()}>
-                      {cell.column.Header === "Created At"
-                        ? utcConverter(cell.value)
-                        : cell.render("Cell")}
+                      {cell.render("Cell")}
                     </TableCell>
                   );
                 })}
