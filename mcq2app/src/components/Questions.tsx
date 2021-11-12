@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { FormControl, Radio, RadioGroup } from "@mui/material";
+import { FormLabel } from "react-bootstrap";
 interface QuestionComponentProps {
   questionObject: any;
   handleSetAnswer: any;
@@ -51,41 +53,45 @@ const Questions = (props: QuestionComponentProps) => {
     <div>
       <h3>{question}</h3>
 
-      {answerOptions.map((item: any, index: any) => {
-        return (
-          <div className="m-3" key={index + 85}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name={item.answerText}
-                  checked={checkedState[index]}
+      {ismultiselect ? (
+        answerOptions.map((item: any, index: any) => {
+          return (
+            <div className="m-3" key={index + 85}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    name={item.answerText}
+                    checked={checkedState[index]}
+                    value={item.answerText}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                }
+                label={item.answerText}
+              />
+            </div>
+          );
+        })
+      ) : (
+        <FormControl component="fieldset">
+          <RadioGroup
+            aria-label={question}
+            name="controlled-radio-buttons-group"
+            onChange={handleChange}
+          >
+            {answerOptions.map((item: any, index: any) => {
+              return (
+                <FormControlLabel
                   value={item.answerText}
-                  onChange={(e) => handleChange(e, index)}
+                  control={<Radio />}
+                  label={item.answerText}
                 />
-              }
-              label={item.answerText}
-            />
-          </div>
-        );
-      })}
+              );
+            })}
+          </RadioGroup>
+        </FormControl>
+      )}
     </div>
   );
 };
 
 export default Questions;
-
-// const handleChange = async (e: any) => {
-//   let checkedValue = e.target.value;
-//   if (e.target.checked) {
-//     console.log(checkedValue);
-//     multiselectArray1 = [...multiselectArray1, checkedValue];
-//     console.log("multi slecet array1", multiselectArray1);
-//   } else {
-//     multiselectArray1 = multiselectArray1.filter(
-//       (item: any) => item !== checkedValue
-//     );
-//   }
-
-//   console.log("multi slecet array", multiselectArray1, exampleArray);
-//   props.handleSetAnswer(multiselectArray1, id);
-// };
