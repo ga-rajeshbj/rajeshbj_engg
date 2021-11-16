@@ -2,41 +2,35 @@ import { Dispatch } from "redux";
 
 import { DetailsAction } from "../types/DetailsAction";
 
-const addName = (name: string) => {
-  return (dispatch: Dispatch<DetailsAction>) => {
-    dispatch({
-      type: "NAME",
-      payload: name,
-    });
-  };
-};
+const addName = (name: string) => ({
+  type: "NAME",
+  payload: name,
+});
 
-const setGender = (gender: string) => {
-  return (dispatch: Dispatch<DetailsAction>) => {
-    dispatch({
-      type: "GENDER",
-      payload: gender,
-    });
-  };
-};
+const setGender = (gender: string) => ({
+  type: "GENDER",
+  payload: gender,
+});
 
-const setLanguage = (language: string) => {
-  return (dispatch: Dispatch<DetailsAction>) => {
-    dispatch({
-      type: "LANGUAGE",
-      payload: language,
-    });
-  };
-};
+const setLanguage = (language: string) => ({
+  type: "LANGUAGE",
+  payload: language,
+});
 
-const setAnswerWithID = (obj: any) => {
-  console.log("action obj", obj);
-  return (dispatch: Dispatch<DetailsAction>) => {
-    dispatch({
-      type: "ADD_ANSWER_WITH_ID",
-      payload: obj,
-    });
-  };
-};
+const setLanguagePreference = (language: string) => ({
+  type: "SET_LANGUAGE_PREFERENCE",
+  payload: language,
+});
 
-export { addName, setGender, setLanguage, setAnswerWithID };
+const setAnswerWithID = (obj: any) => ({
+  type: "ADD_ANSWER_WITH_ID",
+  payload: obj,
+});
+
+export {
+  addName,
+  setGender,
+  setLanguage,
+  setAnswerWithID,
+  setLanguagePreference,
+};

@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { PieChart } from "react-minimal-pie-chart";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/rootReducer";
 const ResultPage = () => {
-  let location: any = useLocation();
 
   const [correctAnswersCount, setCorrectAnswersCount] = useState<number>(0);
   const [wrongAnswersCount, setWrongAnswersCount] = useState<number>(0);
+  const questionJson = useSelector((state: RootState) => state.answerReducer.answerArray)
 
   useEffect(() => {
     let correctCount = 0;
     let wrongCount = 0;
-    location.state.questionJson.map((item: any) => {
+    console.log(questionJson)
+    questionJson.map((item: any) => {
       if (item.ismultiselect) {
         item.correctanswer.length === item.answer.length
           ? item.correctanswer.every((val: any) => item.answer.includes(val)) &&
-            correctCount++
+          correctCount++
           : wrongCount++;
       } else {
         if (item.answer === item.correctanswer) {
@@ -36,9 +38,9 @@ const ResultPage = () => {
     { title: "incorrect", value: wrongAnswersCount, color: "red" },
   ];
   return (
-    <div>
+    <div data-testid="resultPage">
       <p>{correctAnswersCount}</p>
-      {location.state.questionJson.map((item: any, index: any) => {
+      {questionJson.map((item: any, index: any) => {
         return (
           <div key={index + 345}>
             <p>Q{index + 1}</p>
@@ -56,14 +58,14 @@ const ResultPage = () => {
       <div>
         percentage of result correct{" "}
         {(
-          (correctAnswersCount / location.state.questionJson.length) *
+          (correctAnswersCount / questionJson.length) *
           100
         ).toFixed(2)}
       </div>
       <div>
         percentage of result wrong{" "}
         {(
-          (wrongAnswersCount / location.state.questionJson.length) *
+          (wrongAnswersCount / questionJson.length) *
           100
         ).toFixed(2)}
       </div>

@@ -7,23 +7,24 @@ import { useHistory, useRouteMatch } from "react-router-dom";
 import { EnglishjsonArray, defaultObj } from "./defaultJson";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/rootReducer";
+import { setAnswerWithID } from "../redux/action/Action"
 // let questionJson = [...jsonArray];
 
 const McqContainer = () => {
-  let languagestate = useSelector(
-    (state: RootState) => state.detailsReducer.language
+  let languageArray = useSelector(
+    (state: RootState) => state.answerReducer.answerArray
   );
   const [questionJson, setQuestionJson] = useState<any>([
-    ...defaultObj[languagestate],
+    ...languageArray,
   ]);
 
   const [questionObject, setQuestionObject] = useState<any>(questionJson[0]);
   const [indexNumber, setIndexNumber] = useState<number>(0);
 
-  let { path, url } = useRouteMatch();
+
 
   const history = useHistory();
-  let buttonArray = [1, 2, 3, 4, 5];
+  const dispatch = useDispatch()
   const handleCLickQuestion = (e: any, item: any, index: any) => {
     e.preventDefault();
 
@@ -32,20 +33,9 @@ const McqContainer = () => {
   };
 
   const handleSetAnswer = (ans: any, id: any) => {
-    console.log("setting the naswer", ans);
-    setQuestionJson(
-      questionJson.map((item: any) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            answer: ans,
-            isAnswered: item.answer.length === 0 ? false : true,
-          };
-        } else {
-          return item;
-        }
-      })
-    );
+
+    dispatch(setAnswerWithID({ ans, id }))
+
   };
 
   const hadnlePreviousQuestion = () => {
@@ -62,12 +52,9 @@ const McqContainer = () => {
   };
 
   const handleFinishQuizz = () => {
-    history.push({
-      pathname: "/resultPage",
-      state: { questionJson },
-    });
+    history.push("/resultPage")
   };
-
+  console.log(questionJson)
   return (
     <div>
       <div>
@@ -107,12 +94,12 @@ const McqContainer = () => {
           className="m-2"
           onClick={hadnleNextQuestion}
         >
-          next
+          Next
         </Button>
       </div>
 
       <Button variant="contained" color="info" onClick={handleFinishQuizz}>
-        finish quizz
+        Finish Quizz
       </Button>
     </div>
   );

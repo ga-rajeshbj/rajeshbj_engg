@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { FormControl, Radio, RadioGroup } from "@mui/material";
-import { FormLabel } from "react-bootstrap";
+
 interface QuestionComponentProps {
   questionObject: any;
   handleSetAnswer: any;
@@ -51,7 +51,7 @@ const Questions = (props: QuestionComponentProps) => {
 
   return (
     <div>
-      <h3>{question}</h3>
+      <h3>Q{id}. {question}</h3>
 
       {ismultiselect ? (
         answerOptions.map((item: any, index: any) => {
@@ -72,7 +72,7 @@ const Questions = (props: QuestionComponentProps) => {
           );
         })
       ) : (
-        <FormControl component="fieldset">
+        <FormControl component="fieldset" >
           <RadioGroup
             aria-label={question}
             name="controlled-radio-buttons-group"
@@ -82,6 +82,7 @@ const Questions = (props: QuestionComponentProps) => {
               return (
                 <FormControlLabel
                   value={item.answerText}
+                  key={index + 84565}
                   control={<Radio />}
                   label={item.answerText}
                 />

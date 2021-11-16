@@ -17,4 +17,14 @@ interface addAnswer {
   type: "ADD_ANSWER_WITH_ID";
   payload: any;
 }
-export type DetailsAction = name | gender | language | addAnswer;
+
+interface languagePreference {
+  type: "SET_LANGUAGE_PREFERENCE";
+  payload: string;
+}
+export type DetailsAction =
+  | name
+  | gender
+  | language
+  | addAnswer
+  | languagePreference;

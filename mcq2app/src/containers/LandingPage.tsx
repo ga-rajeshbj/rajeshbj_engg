@@ -8,7 +8,7 @@ import {
   Select,
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { addName, setGender, setLanguage } from "../redux/action/Action";
+import { addName, setGender, setLanguage, setLanguagePreference } from "../redux/action/Action";
 import { RootState } from "../redux/rootReducer";
 import { useHistory } from "react-router-dom";
 
@@ -34,6 +34,7 @@ const LandingPage = () => {
     dispatch(addName(personName));
     dispatch(setGender(personGender));
     dispatch(setLanguage(personLanguage));
+    dispatch(setLanguagePreference(personLanguage))
     console.log(state);
     history.push({
       pathname: "/mcqcontainer",
@@ -41,7 +42,7 @@ const LandingPage = () => {
   };
   console.log(state);
   return (
-    <div>
+    <div data-testid="landing-container" >
       <form onSubmit={handleSubmit}>
         <div>
           <TextField
