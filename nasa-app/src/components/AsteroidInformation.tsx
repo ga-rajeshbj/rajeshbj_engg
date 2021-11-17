@@ -17,7 +17,7 @@ function AsteroidInformation() {
           <Card.Text className="text-secondary">
             nasa_jpl_url : {nasa_jpl_url}
           </Card.Text>
-          <Card.Text className="text-secondary">
+          <Card.Text data-testid="data-id" className="text-secondary">
             is_potentially_hazardous_asteroid:{" "}
             {is_potentially_hazardous_asteroid ? "Yes" : "No"}
           </Card.Text>
