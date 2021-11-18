@@ -18,14 +18,12 @@ const CapitalWeather = () => {
     const weather = async () => {
       await axios
         .get(
-          `http://api.weatherstack.com/current?access_key=24c306d5bfb898c74721ced13cda3328&query=${param.capital}`
+          `http://api.weatherstack.com/current?access_key=24c306d5bfb898c74721ced13cda3528&query=${param.capital}`
         )
         .then((response) => {
-          return response.data;
+          return setWeatherData(response.data);
         })
-        .then((data) => {
-          setWeatherData(data);
-        })
+
         .catch((error) => alert(error));
     };
     weather();
@@ -39,7 +37,7 @@ const CapitalWeather = () => {
             <CardMedia
               component="img"
               height="auto"
-              image={weatherData.current.weather_icons[0]}
+              // image={weatherData.current.weather_icons[0] && weatherData.current.weather_icons[0]}
               alt={weatherData.location && weatherData.location.name}
             />
             <CardContent>

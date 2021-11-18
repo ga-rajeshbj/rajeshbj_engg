@@ -11,10 +11,6 @@ export const addData = (object: Data[]) => {
   };
 };
 
-export const loading = () => {
-  return (dispatch: Dispatch<ACTION>) => {
-    dispatch({
-      type: "LOADING",
-    });
-  };
-};
+export const loading = () => ({
+  type: "LOADING",
+});
