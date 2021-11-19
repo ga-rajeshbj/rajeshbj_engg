@@ -12,10 +12,7 @@ function RawJson() {
   return (
     <div>
       <h1 className="text-success text-center">Raw JSON Display</h1>
-      <Typography style={{ overflowWrap: "break-word" }} className="p-2 my-3">
-        {" "}
-        {JSON.stringify(location.state)}
-      </Typography>
+      <Typography data-testid="data-id" style={{ overflowWrap: "break-word" }} className="p-2 my-3">{JSON.stringify(location.state)}</Typography>
 
       <div className="d-flex align-items-center justify-content-center">
         <Button
