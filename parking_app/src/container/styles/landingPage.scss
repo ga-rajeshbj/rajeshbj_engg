@@ -1,0 +1,24 @@
+.landingPageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .formContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    .inputFeild {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      .errorMessage {
+        color: red;
+        font-size: 13px;
+      }
+    }
+  }
+}

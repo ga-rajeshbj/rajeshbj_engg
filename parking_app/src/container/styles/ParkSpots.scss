@@ -1,0 +1,16 @@
+.parkSpaceContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+
+  & .parkSpotContainer {
+    // flex: 1 1 33% !important;
+    // margin: 10px 20px;
+    width: 31%;
+
+    padding: 20px 10px;
+    margin: 5px;
+    height: 200px;
+  }
+}
